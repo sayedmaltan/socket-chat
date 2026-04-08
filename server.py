@@ -1,24 +1,30 @@
-# server.py
 import socket
+import os
+
+HOST = "0.0.0.0"
+PORT = int(os.environ.get("PORT", 5000))
 
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server_socket.bind(('0.0.0.0', 50000))
+server_socket.bind((HOST, PORT))
 server_socket.listen()
 
-print("Server listening on port 65432...")
-conn, addr = server_socket.accept()
+print(f"Server listening on port {PORT}...")
 
-with conn:
+while True:
+    conn, addr = server_socket.accept()
     print('Connected by', addr)
+
     while True:
         data = conn.recv(1024)
         if not data:
             print("Connection closed by client.")
             break
 
-        print("Received from client:", data.decode())
+        message = data.decode()
+        print("Received:", message)
 
-       
-        reply = input("Enter your message : ")
+        # رد تلقائي بدل input
+        reply = f"Server received: {message}"
         conn.sendall(reply.encode())
-        
+
+    conn.close()
