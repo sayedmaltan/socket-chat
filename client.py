@@ -2,7 +2,7 @@
 import socket
 
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client_socket.connect(('41.36.230.132', 50000))
+client_socket.connect(('socket-chat-production-fe71.up.railway.app', 50000))
 
 while True:
    
