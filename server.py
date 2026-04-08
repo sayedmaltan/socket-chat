@@ -1,14 +1,10 @@
 import socket
-import os
-
-HOST = "0.0.0.0"
-PORT = int(os.environ.get("PORT", 5000))
 
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server_socket.bind((HOST, PORT))
+server_socket.bind(("0.0.0.0", 50000))
 server_socket.listen()
 
-print(f"Server listening on port {PORT}...")
+print("Server listening on port 50000...")
 
 while True:
     conn, addr = server_socket.accept()
